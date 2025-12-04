@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca por Versículos - Estudo Bíblico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .results {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .verse-ref {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="index.html">Início</a>
+                <a href="index.html#livros">Livros</a>
+                <a href="index.html#recursos">Recursos</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="contact">
+        <div class="container search-container">
+            <h2>Busca por Versículos</h2>
+            <p class="section-subtitle">Procure versículos por palavra-chave ou referência</p>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Digite uma palavra-chave ou referência (ex: fé, João 3:16)">
+                <button class="btn btn-primary" onclick="searchVerse()">Buscar</button>
+            </div>
+            
+            <div class="results" id="results" style="display: none;">
+                <div id="resultContent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+
+    <script>
+        const biblicalVerses = [
+            // Pentateuco
+            { ref: 'Gênesis 1:1', text: 'No princípio criou Deus os céus e a terra.' },
+            { ref: 'Gênesis 3:15', text: 'E porei inimizade entre ti e a mulher, e entre a tua descendência e o seu descendente; este te ferirá a cabeça, e tu lhe ferirás o calcanhar.' },
+            { ref: 'Êxodo 3:14', text: 'E disse Deus a Moisés: EU SOU O QUE SOU; disse mais: Assim dirás aos filhos de Israel: EU SOU me enviou a vós.' },
+            { ref: 'Êxodo 20:1-17', text: 'E Deus falou todas estas palavras, dizendo: Eu sou o SENHOR, teu Deus... Não terás outros deuses diante de mim.' },
+            { ref: 'Levítico 19:18', text: 'Não te vingarás, nem guardarás ira contra os filhos do teu povo; mas amarás o teu próximo como a ti mesmo. Eu sou o SENHOR.' },
+            { ref: 'Números 6:24-26', text: 'O SENHOR te abençoe e te guarde; o SENHOR faça resplandecer o seu rosto sobre ti e tenha misericórdia de ti; o SENHOR levante sobre ti o seu rosto e te dê paz.' },
+            { ref: 'Deuteronômio 6:4-5', text: 'Ouve, Israel, o SENHOR, nosso Deus, é o único SENHOR. Amarás, pois, o SENHOR, teu Deus, de todo o teu coração, de toda a tua alma e de toda a tua força.' },
+
+            // Livros Históricos
+            { ref: 'Josué 1:8', text: 'Não se aparte da tua boca o livro desta lei; antes medita nele dia e noite, para que tenhas cuidado de fazer segundo tudo quanto nele está escrito.' },
+            { ref: 'Juízes 6:14', text: 'Então o SENHOR se voltou para ele e disse: Vai nesta tua força, e livra a Israel da mão dos midianitas; porventura não te enviei eu?' },
+            { ref: 'Rute 3:11', text: 'Porque toda a cidade do meu povo sabe que tu és mulher virtuosa.' },
+            { ref: '1 Samuel 15:22', text: 'Mas Samuel disse: Tem o SENHOR tanto prazer em holocaustos e sacrifícios como em obedecer à voz do SENHOR?' },
+            { ref: '2 Samuel 7:12-13', text: 'Quando teus dias se cumprirem, e descansares com teus pais, farei levantar depois de ti um da tua linhagem, que procederá de ti, e estabelecerei o seu reino.' },
+            { ref: '1 Reis 3:9', text: 'Dá, pois, ao teu servo um coração sábio para julgar o teu povo, a fim de que eu possa discernir entre o bem e o mal.' },
+            { ref: '2 Reis 19:35', text: 'E aconteceu que, naquela noite, o anjo do SENHOR saiu e feriu no acampamento dos assírios cento e oitenta e cinco mil; e levantando-se de madrugada, eis que tudo eram corpos mortos.' },
+            { ref: '1 Crônicas 16:34', text: 'Rendei graças ao SENHOR, porque ele é bom; porque a sua misericórdia dura para sempre.' },
+            { ref: '2 Crônicas 7:14', text: 'Se o meu povo, que se chama pelo meu nome, se humilhar e orar, e buscar a minha face, e se converter dos seus maus caminhos, então eu ouvirei do céu, perdoarei os seus pecados e sararei a sua terra.' },
+            { ref: 'Esdras 7:10', text: 'Porque Esdras tinha preparado o seu coração para buscar a lei do SENHOR e para cumpri-la, e para ensinar em Israel os seus estatutos e as suas ordenanças.' },
+            { ref: 'Neemias 8:10', text: 'Porque a alegria do SENHOR é a vossa força.' },
+            { ref: 'Ester 4:14', text: 'Porque se, neste tempo, te calares, alívio e livramento virão de outra parte para os judeus, mas tu e a casa de teu pai perecereis.' },
+
+            // Livros Poéticos
+            { ref: 'Jó 19:25', text: 'Pois eu sei que o meu Redentor vive, e que por fim se levantará sobre a terra.' },
+            { ref: 'Salmos 1:1', text: 'Bem-aventurado o homem que não anda no conselho dos ímpios, não se detém no caminho dos pecadores, nem se assenta na roda dos escarnecedores.' },
+            { ref: 'Salmos 23:1', text: 'O SENHOR é o meu pastor, nada me faltará.' },
+            { ref: 'Salmos 119:105', text: 'Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho.' },
+            { ref: 'Salmos 145:18', text: 'O SENHOR é perto de todos os que o invocam, de todos os que o invocam em verdade.' },
+            { ref: 'Provérbios 3:5-6', text: 'Confia no SENHOR de todo o teu coração e não te estribes no teu próprio entendimento. Em todos os teus caminhos reconhece-o, e ele endireitará as tuas veredas.' },
+            { ref: 'Provérbios 22:6', text: 'Ensina à criança o caminho em que deve andar; e até quando envelhecer não se desviará dele.' },
+            { ref: 'Eclesiastes 12:13', text: 'De tudo o que se ouviu, a conclusão é: Teme a Deus e guarda os seus mandamentos; porque isto é o dever de todo homem.' },
+            { ref: 'Cântico dos Cânticos 2:4', text: 'Levou-me à casa do vinho, e a sua bandeira sobre mim é amor.' },
+
+            // Profetas Maiores
+            { ref: 'Isaías 9:6', text: 'Porque um menino nos nasceu, um filho se nos deu; o governo está sobre os seus ombros; e o seu nome será: Maravilhoso Conselheiro, Deus Forte, Pai da Eternidade, Príncipe da Paz.' },
+            { ref: 'Isaías 40:31', text: 'Mas os que esperam no SENHOR renovam as suas forças. Sobem com asas como águias; correm, e não se cansam; caminham, e não se fatigam.' },
+            { ref: 'Jeremias 29:11', text: 'Porque eu bem sei os pensamentos que penso de vós, diz o SENHOR; pensamentos de paz, e não de mal, para vos dar um fim esperado.' },
+            { ref: 'Lamentações 3:22-23', text: 'As misericórdias do SENHOR são a causa de não sermos consumidos; porque as suas misericórdias não têm fim; renovam-se cada manhã.' },
+            { ref: 'Ezequiel 36:26', text: 'E vos darei um coração novo, e porei um espírito novo dentro de vós; e tirarei da vossa carne o coração de pedra, e vos darei um coração de carne.' },
+
+            // Profetas Menores
+            { ref: 'Daniel 3:17-18', text: 'Se assim é, o nosso Deus, a quem nós servimos, é poderoso para nos livrar da fornalha de fogo ardente; e da tua mão, ó rei, nos livrará.' },
+            { ref: 'Oséias 6:3', text: 'Conheçamos, e prossigamos em conhecer ao SENHOR; a sua saída é certa como a alva; e ele virá a nós como a chuva, como a chuva serôdia que rega a terra.' },
+            { ref: 'Joel 2:28', text: 'E há de ser que, depois, derramarei o meu Espírito sobre toda a carne; e vossos filhos e filhas profetizarão, vossos velhos terão sonhos, vossos jovens terão visões.' },
+            { ref: 'Amós 5:24', text: 'Antes corra o juízo como as águas, e a justiça como um ribeiro perene.' },
+            { ref: 'Obadias 1:21', text: 'E libertadores subirão ao monte de Sião, para julgar o monte de Esaú; e o reino será do SENHOR.' },
+            { ref: 'Jonas 3:10', text: 'E Deus viu as suas obras, que se converteram do seu mau caminho; e Deus se arrependeu do mal que tinha dito que lhes faria, e não o fez.' },
+            { ref: 'Miquéias 6:8', text: 'Ele te declarou, ó homem, o que é bom e que é o que o SENHOR pede de ti: que pratiques a justiça, e ames a misericórdia, e andes humildemente com o teu Deus.' },
+            { ref: 'Naum 1:7', text: 'O SENHOR é bom, uma fortaleza no dia da angústia; e conhece aos que nele confiam.' },
+            { ref: 'Habacuque 2:4', text: 'Eis que a sua alma está inchada, não é reta nele; mas o justo viverá pela sua fé.' },
+            { ref: 'Sofonias 3:17', text: 'O SENHOR, teu Deus, está no meio de ti, poderoso para te salvar; ele se deleitará em ti com alegria, calar-se-á de amor, exultar-se-á sobre ti com cânticos.' },
+            { ref: 'Ageu 2:4', text: 'Mas agora sê forte, Zorobabel, diz o SENHOR; sê forte, Josué, filho de Jozadaque, sumo sacerdote; sê forte, povo todo da terra, diz o SENHOR; porque eu sou convosco, diz o SENHOR dos Exércitos.' },
+            { ref: 'Zacarias 9:9', text: 'Alegra-te muito, filha de Sião; exulta, filha de Jerusalém; eis que o teu Rei virá a ti, justo e vencedor, humilde e montado em jumento, e em um jumento, filho de jumenta.' },
+            { ref: 'Malaquias 3:10', text: 'Trazei todos os dízimos à casa do tesouro, para que haja mantimento na minha casa; e depois fazei prova de mim, nisto, diz o SENHOR dos Exércitos, se eu não vos abrir as janelas do céu e não derramar sobre vós uma bênção tal, que não haja lugar bastante para a recolherdes.' },
+
+            // Evangelhos
+            { ref: 'Mateus 5:3-12', text: 'Bem-aventurados os pobres de espírito, porque deles é o reino dos céus. Bem-aventurados os que choram, porque serão consolados...' },
+            { ref: 'Mateus 6:9-13', text: 'Portanto, vós orareis assim: Pai nosso, que estás nos céus, santificado seja o teu nome; venha o teu reino; faça-se a tua vontade, assim na terra como no céu...' },
+            { ref: 'Mateus 11:28', text: 'Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.' },
+            { ref: 'Mateus 28:19-20', text: 'Portanto, ide, ensinai todas as nações, batizando-as em nome do Pai, e do Filho, e do Espírito Santo; ensinando-as a guardar todas as coisas que vos tenho mandado...' },
+            { ref: 'Marcos 1:15', text: 'Dizendo: O tempo é cumprido, e o reino de Deus está próximo. Arrependei-vos e crede no evangelho.' },
+            { ref: 'Marcos 11:24', text: 'Por isso vos digo que tudo quanto pedirdes em oração, crede que recebereis, e tê-lo-eis.' },
+            { ref: 'Lucas 1:37', text: 'Porque para Deus nada é impossível.' },
+            { ref: 'Lucas 6:38', text: 'Dai, e dar-se-vos-á; boa medida, recalcada, sacudida e transbordante vos deitarão no regaço. Porque com a mesma medida com que medirdes também vos medirão de novo.' },
+            { ref: 'João 1:1', text: 'No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus.' },
+            { ref: 'João 3:16', text: 'Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.' },
+            { ref: 'João 14:6', text: 'Jesus disse-lhe: Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai senão por mim.' },
+            { ref: 'João 14:27', text: 'Deixo-vos a paz, a minha paz vos dou; não vo-la dou como a dá o mundo. Não se turbe o vosso coração, nem se atemorize.' },
+            { ref: 'João 15:5', text: 'Eu sou a videira, vós sois as varas; quem está em mim e eu nele, esse dá muito fruto, porque sem mim nada podeis fazer.' },
+
+            // Atos
+            { ref: 'Atos 1:8', text: 'Mas recebereis a virtude do Espírito Santo, que há de vir sobre vós; e ser-me-eis testemunhas, tanto em Jerusalém como em toda a Judeia e Samaria, e até aos confins da terra.' },
+            { ref: 'Atos 2:38', text: 'E Pedro lhes disse: Arrependei-vos, e cada um de vós seja batizado em nome de Jesus Cristo para perdão dos pecados; e recebereis o dom do Espírito Santo.' },
+            { ref: 'Atos 17:28', text: 'Porque nele vivemos, e nos movemos, e existimos; como também alguns dos vossos poetas têm dito: Pois somos também geração dele.' },
+
+            // Epístolas Paulinas
+            { ref: 'Romanos 3:23', text: 'Porque todos pecaram e destituídos estão da glória de Deus.' },
+            { ref: 'Romanos 6:23', text: 'Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna, por Cristo Jesus, nosso Senhor.' },
+            { ref: 'Romanos 8:28', text: 'E sabemos que todas as coisas contribuem para o bem daqueles que amam a Deus, daqueles que são chamados segundo o seu propósito.' },
+            { ref: 'Romanos 10:9', text: 'A saber: Se com a tua boca confessares ao Senhor Jesus, e em teu coração creres que Deus o ressuscitou dentre os mortos, serás salvo.' },
+            { ref: '1 Coríntios 13:4-7', text: 'O amor é sofredor, é benigno; o amor não é invejoso, não se vangloria, não se enche de orgulho; não é desonesto, não busca seus próprios interesses...' },
+            { ref: '1 Coríntios 15:57', text: 'Mas graças a Deus, que nos dá a vitória por nosso Senhor Jesus Cristo.' },
+            { ref: '2 Coríntios 5:17', text: 'Assim que, se alguém está em Cristo, nova criatura é; as coisas velhas já passaram; eis que tudo se fez novo.' },
+            { ref: 'Gálatas 2:20', text: 'E já não vivo eu, mas Cristo vive em mim; e a vida que agora vivo na carne, vivo-a na fé do Filho de Deus, que me amou e se entregou a si mesmo por mim.' },
+            { ref: 'Gálatas 5:22-23', text: 'Mas o fruto do Espírito é: amor, gozo, paz, longanimidade, benignidade, bondade, fé, mansidão, temperança...' },
+            { ref: 'Efésios 2:8-9', text: 'Porque pela graça sois salvos, por meio da fé; e isto não vem de vós, é dom de Deus; não vem das obras, para que ninguém se glorie.' },
+            { ref: 'Efésios 3:17-19', text: 'Para que Cristo habite pela fé no vosso coração; a fim de que, estando radicados e fundados em amor, possais compreender, com todos os santos...' },
+            { ref: 'Efésios 4:2-3', text: 'Com toda a humildade e mansidão, com longanimidade, suportando-vos uns aos outros em amor, procurando guardar a unidade do Espírito no vínculo da paz.' },
+            { ref: 'Efésios 6:12', text: 'Porque não temos que lutar contra a carne e o sangue, mas contra os principados, contra as potestades, contra os príncipes das trevas deste século, contra as forças espirituais da maldade, nos lugares celestiais.' },
+            { ref: 'Filipenses 3:8', text: 'E, na verdade, tenho também por perda todas as coisas, pela excelência do conhecimento de Cristo Jesus, meu Senhor; por amor do qual perdi todas essas coisas, e as tenho por esterco...' },
+            { ref: 'Filipenses 4:4', text: 'Regozijai-vos sempre no Senhor; outra vez digo, regozijai-vos.' },
+            { ref: 'Filipenses 4:6-7', text: 'Não estejais ansiosos por coisa alguma; em tudo, porém, sejam conhecidas, diante de Deus, as vossas petições, pela oração e pela súplica, com ação de graças.' },
+            { ref: 'Filipenses 4:13', text: 'Posso todas as coisas naquele que me fortalece.' },
+            { ref: 'Colossenses 1:27', text: 'A quem Deus quis fazer conhecer quais são as riquezas da glória deste mistério entre os gentios, que é Cristo em vós, a esperança da glória.' },
+            { ref: 'Colossenses 3:16', text: 'A palavra de Cristo habite em vós abundantemente, em toda a sabedoria, ensinando-vos e admoestando-vos uns aos outros, com salmos, hinos e cânticos espirituais...' },
+            { ref: '1 Tessalonicenses 5:16-18', text: 'Regozijai-vos sempre. Orai sem cessar. Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.' },
+            { ref: '2 Timóteo 2:15', text: 'Procura apresentar-te a Deus aprovado, como obreiro que não tem de que se envergonhar, que maneja bem a palavra da verdade.' },
+            { ref: '2 Timóteo 3:16', text: 'Toda a Escritura é divinamente inspirada, e proveitosa para ensinar, para redarguir, para corrigir, para instruir em justiça.' },
+            { ref: 'Tito 2:12', text: 'Ensinando-nos que, renunciando à impiedade e aos desejos mundanos, vivamos neste presente século, sóbria, e justa, e piedosamente.' },
+            { ref: 'Filêmon 1:7', text: 'Porque tive grande alegria e consolação no teu amor, pois as entranhas dos santos foram recreadas por ti, irmão.' },
+
+            // Hebreus
+            { ref: 'Hebreus 4:12', text: 'Porque a palavra de Deus é viva, e eficaz, e mais penetrante do que espada alguma de dois gumes, e penetra até à divisão da alma e do espírito...' },
+            { ref: 'Hebreus 10:24-25', text: 'E consideremo-nos uns aos outros, para nos estimularmos à caridade e às boas obras; não deixando a nossa congregação, como é costume de alguns; antes, admoestando-nos uns aos outros...' },
+            { ref: 'Hebreus 11:1', text: 'Ora, a fé é o firme fundamento das coisas que se esperam, e a prova das coisas que não se veem.' },
+            { ref: 'Hebreus 12:2', text: 'Olhando para Jesus, autor e consumador da fé, o qual, pelo gozo que lhe estava proposto, suportou a cruz, desprezando a afronta, e assentou-se à destra do trono de Deus.' },
+
+            // Tiago
+            { ref: 'Tiago 1:2-4', text: 'Meus irmãos, tende por motivo de toda a alegria o passardes por várias provações, sabendo que a prova da vossa fé produz a paciência.' },
+            { ref: 'Tiago 3:17', text: 'Mas a sabedoria que vem do alto é, primeiramente, pura, depois pacífica, moderada, tratável, cheia de misericórdia e de bons frutos, sem parcialidade, e sem hipocrisia.' },
+            { ref: 'Tiago 4:7', text: 'Sujeitai-vos, pois, a Deus; resisti ao diabo, e ele fugirá de vós.' },
+
+            // 1 Pedro
+            { ref: '1 Pedro 1:3', text: 'Bendito o Deus e Pai de nosso Senhor Jesus Cristo, que, segundo a sua muita misericórdia, nos gerou de novo para uma viva esperança...' },
+            { ref: '1 Pedro 5:7', text: 'Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.' },
+            { ref: '1 Pedro 5:10', text: 'E o Deus de toda a graça, que em Cristo vos chamou à sua eterna glória, depois de haveres sofrido um pouco, vos há de aperfeiçoar, confirmar, fortalecer e estabelecer.' },
+
+            // 2 Pedro
+            { ref: '2 Pedro 1:4', text: 'Pelas quais nos são dadas as preciosíssimas e máximas promessas, para que por elas fiqueis participantes da natureza divina, fugindo da corrupção, que pela concupiscência há no mundo.' },
+            { ref: '2 Pedro 3:18', text: 'Antes crescei na graça, e no conhecimento de nosso Senhor e Salvador Jesus Cristo. A ele seja dada a glória, assim agora como no dia da eternidade. Amém.' },
+
+            // 1, 2, 3 João
+            { ref: '1 João 1:7', text: 'Mas, se andarmos na luz, como ele na luz está, temos comunhão uns com os outros, e o sangue de Jesus Cristo, seu Filho, nos purifica de todo o pecado.' },
+            { ref: '1 João 4:7', text: 'Amados, amemo-nos uns aos outros; porque o amor é de Deus; e todo aquele que ama é nascido de Deus, e conhece a Deus.' },
+            { ref: '1 João 4:8', text: 'Aquele que não ama não conhece a Deus; porque Deus é amor.' },
+            { ref: '2 João 1:3', text: 'Graça, misericórdia, e paz sejam convosco da parte de Deus Pai, e da parte do Senhor Jesus Cristo, Filho do Pai, em verdade e amor.' },
+            { ref: '3 João 1:2', text: 'Amado, desejo que te vá bem em todas as coisas, e que tenhas saúde, assim como bem vai à tua alma.' },
+
+            // Judas
+            { ref: 'Judas 1:24-25', text: 'Ora, àquele que é poderoso para vos guardar de tropeçar, e vos apresentar irrepreensíveis e com alegria diante da sua glória, ao único Deus sábio, Savador nosso, seja glória e majestade...' },
+
+            // Apocalipse
+            { ref: 'Apocalipse 1:8', text: 'Eu sou o Alfa e o Ômega, diz o Senhor Deus, aquele que é, e que era, e que há de vir, o Todo-Poderoso.' },
+            { ref: 'Apocalipse 3:20', text: 'Eis que estou à porta, e bato; se alguém ouvir a minha voz, e abrir a porta, entrarei em sua casa, e com ele cearei, e ele comigo.' },
+            { ref: 'Apocalipse 21:3-4', text: 'E ouvi uma grande voz, vinda do trono, que dizia: Eis aqui o tabernáculo de Deus com os homens, pois com eles habitará, e eles serão seu povo, e o mesmo Deus estará com eles...' },
+            { ref: 'Apocalipse 21:4', text: 'E Deus limpará de seus olhos toda a lágrima; e não haverá mais morte, nem pranto, nem clamor, nem dor; porque as primeiras coisas já passaram.' },
+            { ref: 'Apocalipse 22:17', text: 'E o Espírito e a noiva dizem: Vem. E quem ouve, diga: Vem. E quem tem sede, venha; e quem quiser, tome de graça a água da vida.' },
+            { ref: 'Apocalipse 22:20-21', text: 'Aquele que testifica estas coisas diz: Certamente cedo venho. Amém! Vem, Senhor Jesus. A graça do Senhor Jesus seja com todos vós. Amém.' }
+        ];
+
+        function searchVerse() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            
+            if (!searchInput) {
+                results.style.display = 'none';
+                return;
+            }
+            
+            const found = biblicalVerses.filter(verse => 
+                verse.text.toLowerCase().includes(searchInput) || 
+                verse.ref.toLowerCase().includes(searchInput)
+            );
+            
+            resultContent.innerHTML = '';
+            
+            if (found.length > 0) {
+                found.forEach(verse => {
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.innerHTML = `
+                        <div class="verse-ref">${verse.ref}</div>
+                        <p>${verse.text}</p>
+                    `;
+                    resultContent.appendChild(div);
+                });
+            } else {
+                resultContent.innerHTML = '<p style="text-align: center; color: #999;">Nenhum versículo encontrado.</p>';
+            }
+            
+            results.style.display = 'block';
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchVerse();
+            }
+        });
+    </script>
+</body>
+</html>

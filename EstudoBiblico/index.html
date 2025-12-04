@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo Bíblico - Explore a Palavra de Deus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="#inicio">Início</a>
+                <a href="#livros">Livros</a>
+                <a href="#recursos">Recursos</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Bem-vindo ao Estudo Bíblico</h2>
+            <p>Explore a Palavra de Deus e aprofunde seu conhecimento das Escrituras Sagradas</p>
+            <button class="btn btn-primary" onclick="scrollToSection('livros')">Começar a Estudar</button>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="books" id="livros">
+        <div class="container">
+            <h2>Livros da Bíblia</h2>
+            <p class="section-subtitle">A Bíblia contém 66 livros divididos em Antigo e Novo Testamento</p>
+            
+            <div class="books-grid">
+                <div class="book-card">
+                    <h3>Antigo Testamento</h3>
+                    <p class="book-info">39 livros</p>
+                    <ul class="book-list">
+                        <li><strong>Pentateuco:</strong> Gênesis, Êxodo, Levítico, Números, Deuteronômio</li>
+                        <li><strong>Históricos:</strong> Josué, Juízes, Rute, 1 e 2 Samuel</li>
+                        <li><strong>Poéticos:</strong> Jó, Salmos, Provérbios, Eclesiastes, Cântico dos Cânticos</li>
+                        <li><strong>Proféticos:</strong> Isaías, Jeremias, Lamentações, Ezequiel e outros</li>
+                    </ul>
+                </div>
+
+                <div class="book-card">
+                    <h3>Novo Testamento</h3>
+                    <p class="book-info">27 livros</p>
+                    <ul class="book-list">
+                        <li><strong>Evangelhos:</strong> Mateus, Marcos, Lucas, João</li>
+                        <li><strong>Atos:</strong> História da Igreja Primitiva</li>
+                        <li><strong>Epístolas Paulinas:</strong> Romanos, Coríntios, Gálatas e outras</li>
+                        <li><strong>Outros:</strong> Hebreus, Tiago, 1 e 2 Pedro, Apocalipse</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Resources Section -->
+    <section class="recursos" id="recursos">
+        <div class="container">
+            <h2>Recursos de Estudo</h2>
+            <p class="section-subtitle">Ferramentas para aprofundar seu conhecimento bíblico</p>
+            
+            <div class="resources-grid">
+                <a href="busca-versiculos.html" class="resource-card">
+                    <div class="resource-icon">🔍</div>
+                    <h3>Busca por Versículos</h3>
+                    <p>Procure por palavras-chave ou referências de versículos específicos</p>
+                </a>
+
+                <a href="comentarios.html" class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <h3>Comentários</h3>
+                    <p>Acesse comentários e explicações de estudiosos da Bíblia</p>
+                </a>
+
+                <a href="plano-leitura.html" class="resource-card">
+                    <div class="resource-icon">📅</div>
+                    <h3>Plano de Leitura</h3>
+                    <p>Siga um plano estruturado para ler a Bíblia em um ano</p>
+                </a>
+
+                <a href="temas-biblicos.html" class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3>Temas Bíblicos</h3>
+                    <p>Estude temas como fé, amor, salvação, perdão e outros</p>
+                </a>
+
+                <a href="dicionario-biblico.html" class="resource-card">
+                    <div class="resource-icon">🗣️</div>
+                    <h3>Dicionário Bíblico</h3>
+                    <p>Entenda palavras e conceitos importantes do texto bíblico</p>
+                </a>
+
+                <a href="comunidade.html" class="resource-card">
+                    <div class="resource-icon">💬</div>
+                    <h3>Comunidade</h3>
+                    <p>Compartilhe dúvidas e insights com outros estudiosos</p>
+                </a>
+
+                <a href="biblia-online.html" class="resource-card">
+                    <div class="resource-icon">📖</div>
+                    <h3>Bíblia Online</h3>
+                    <p>Acesse a Bíblia por livro e capítulo — funciona online e offline.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Verse Section -->
+    <section class="daily-verse">
+        <div class="container">
+            <h2>Versículo do Dia</h2>
+            <div class="verse-box" id="verseBox">
+                <p id="verseText">Carregando versículo...</p>
+                <p id="verseReference"></p>
+            </div>
+            <button class="btn btn-secondary" onclick="loadNewVerse()">Novo Versículo</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+                <input type="text" id="userName" placeholder="Seu Nome" required>
+                <input type="email" id="userEmail" placeholder="Seu Email" required>
+                <textarea id="userMessage" placeholder="Sua Mensagem" rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            <p id="statusMessage" style="text-align: center; margin-top: 1rem; display: none;"></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+
+    <!-- Fallback local: coloque uma cópia do EmailJS em assets/emailjs.browser.min.js -->
+    <script type="text/javascript" src="assets/emailjs.browser.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    
+    <script>
+        // Versículos para carregar
+        const versesData = [
+            { text: "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna.", reference: "João 3:16" },
+            { text: "Confiai no SENHOR de todo o vosso coração e não vos apoieis na vossa inteligência.", reference: "Provérbios 3:5" },
+            { text: "Lançai toda a vossa ansiedade sobre ele, porque ele tem cuidado de vós.", reference: "1 Pedro 5:7" },
+            { text: "Bem-aventurados os que têm fome e sede de justiça, porque serão fartos.", reference: "Mateus 5:6" },
+            { text: "A paz vos deixo, minha paz vos dou; não a dou como a dá o mundo.", reference: "João 14:27" },
+            { text: "Porque nele vivemos, nos movemos e existimos; como também alguns dos vossos poetas têm dito: Pois somos também geração dele.", reference: "Atos 17:28" },
+            { text: "Todo aquele que invoca o nome do Senhor será salvo.", reference: "Romanos 10:13" },
+            { text: "Posso todas as coisas naquele que me fortalece.", reference: "Filipenses 4:13" },
+            { text: "Porque a palavra de Deus é viva, e eficaz, e mais penetrante do que espada alguma de dois gumes.", reference: "Hebreus 4:12" },
+            { text: "Bem-aventurado aquele cuja transgressão é perdoada, e cujo pecado é coberto.", reference: "Salmos 32:1" }
+        ];
+        
+        let lastIndex = -1;
+        
+        window.loadNewVerse = function() {
+            let index;
+            do {
+                index = Math.floor(Math.random() * versesData.length);
+            } while (index === lastIndex && versesData.length > 1);
+            
+            lastIndex = index;
+            const verse = versesData[index];
+            document.getElementById('verseText').innerHTML = '"' + verse.text + '"';
+            document.getElementById('verseReference').innerHTML = verse.reference;
+        }
+        
+        // Carrega versículo quando a página abre
+        window.loadNewVerse();
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

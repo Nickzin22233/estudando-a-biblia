@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade - Estudo Bíblico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        
+        .community-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .community-posts {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .post {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            border-left: 4px solid #667eea;
+        }
+        
+        .post:last-child {
+            border-bottom: none;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-date {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+        
+        .post-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .post-actions a {
+            color: #667eea;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .post-actions a:hover {
+            text-decoration: underline;
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+        
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .sidebar-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+        
+        .new-post-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .new-post-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        
+        .new-post-form button {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .community-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                grid-column: 1;
+                grid-row: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="index.html">Início</a>
+                <a href="index.html#livros">Livros</a>
+                <a href="index.html#recursos">Recursos</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="contact">
+        <div class="container content-section">
+            <h2>Comunidade de Estudo</h2>
+            <p class="section-subtitle">Compartilhe dúvidas, insights e aprendizados com outros estudiosos</p>
+            
+            <div class="new-post-form">
+                <h3>Compartilhe seu pensamento</h3>
+                <textarea placeholder="Qual é sua pergunta ou reflexão sobre a Bíblia?" rows="4"></textarea>
+                <button class="btn btn-primary" onclick="submitPost()">Publicar</button>
+            </div>
+            
+            <div class="community-container">
+                <div class="community-posts" id="postsContainer">
+                    <div class="post">
+                        <div class="post-author">👤 Maria Silva</div>
+                        <div class="post-date">Hoje às 10:30</div>
+                        <div class="post-content">
+                            Estou estudando Romanos 8 e gostaria de entender melhor o significado de "predestinação". 
+                            Alguém pode ajudar?
+                        </div>
+                        <div class="post-actions">
+                            <a href="#">💬 Responder</a>
+                            <a href="#">❤️ Gostar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-author">👤 João Santos</div>
+                        <div class="post-date">Ontem às 15:45</div>
+                        <div class="post-content">
+                            Refleti sobre Mateus 5:9 - Bem-aventurados os pacificadores - e percebi como isso é 
+                            relevante nos dias de hoje. A paz não é passividade, mas ação!
+                        </div>
+                        <div class="post-actions">
+                            <a href="#">💬 Responder</a>
+                            <a href="#">❤️ Gostar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-author">👤 Ana Costa</div>
+                        <div class="post-date">2 dias atrás</div>
+                        <div class="post-content">
+                            Encontrei uma contradição aparente entre Tiago e Paulo sobre a fé e as obras. 
+                            Qual a melhor forma de reconciliar essas passagens?
+                        </div>
+                        <div class="post-actions">
+                            <a href="#">💬 Responder</a>
+                            <a href="#">❤️ Gostar</a>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-author">👤 Pedro Oliveira</div>
+                        <div class="post-date">3 dias atrás</div>
+                        <div class="post-content">
+                            Começei meu estudo de Gênesis e fico pensando: como devemos interpretar os primeiros 
+                            capítulos? Literalmente ou alegoricamente?
+                        </div>
+                        <div class="post-actions">
+                            <a href="#">💬 Responder</a>
+                            <a href="#">❤️ Gostar</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar">
+                    <h3>📊 Estatísticas</h3>
+                    <div class="sidebar-item">
+                        <strong>Membros Ativos:</strong> 1,234
+                    </div>
+                    <div class="sidebar-item">
+                        <strong>Posts Totais:</strong> 5,678
+                    </div>
+                    <div class="sidebar-item">
+                        <strong>Respostas Úteis:</strong> 8,901
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem;">🌟 Tópicos Populares</h3>
+                    <div class="sidebar-item">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Oração</a> (234 posts)
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Perdão</a> (189 posts)
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Esperança</a> (156 posts)
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Fé</a> (142 posts)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+
+    <script>
+        function submitPost() {
+            alert('Funcionalidade de publicação em desenvolvimento. Esta seria integrada com um backend real.');
+        }
+    </script>
+</body>
+</html>

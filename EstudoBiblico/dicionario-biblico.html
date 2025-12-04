@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicionário Bíblico - Estudo Bíblico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        
+        .dictionary-search {
+            margin-bottom: 2rem;
+        }
+        
+        .dictionary-search input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .dictionary-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .word-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .word-item:last-child {
+            border-bottom: none;
+        }
+        
+        .word-title {
+            font-size: 1.3rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .word-etymology {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .word-definition {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .word-reference {
+            color: #666;
+            font-size: 0.95rem;
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="index.html">Início</a>
+                <a href="index.html#livros">Livros</a>
+                <a href="index.html#recursos">Recursos</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="contact">
+        <div class="container content-section">
+            <h2>Dicionário Bíblico</h2>
+            <p class="section-subtitle">Entenda palavras e conceitos importantes da Bíblia</p>
+            
+            <div class="dictionary-search">
+                <input type="text" id="dictionarySearch" placeholder="Busque uma palavra..." onkeyup="filterWords()">
+            </div>
+            
+            <div class="dictionary-content" id="dictionaryContent">
+                <div class="word-item">
+                    <div class="word-title">Ágape</div>
+                    <div class="word-etymology">Grego: ἀγάπη (agápē)</div>
+                    <div class="word-definition">
+                        Amor incondicional, sacrificial e divino. Diferencia-se de outras formas de amor por sua natureza altruísta 
+                        e sem expectativa de retorno. É o amor com o qual Deus ama a humanidade.
+                    </div>
+                    <div class="word-reference">Ver: João 3:16, 1 João 4:8</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Aliança</div>
+                    <div class="word-etymology">Hebraico: בְרִית (berit)</div>
+                    <div class="word-definition">
+                        Um pacto ou contrato entre Deus e o homem. A Bíblia menciona várias alianças importantes: com Abraão, 
+                        Moisés e através de Cristo. Representa uma promessa mútua de relacionamento.
+                    </div>
+                    <div class="word-reference">Ver: Gênesis 9:8-17, Êxodo 19:5, Hebreus 8:6</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Arrependimento</div>
+                    <div class="word-etymology">Grego: μετανοέω (metanoeó)</div>
+                    <div class="word-definition">
+                        Mudança de mente ou direção. Mais do que apenas sentir remorso, é uma transformação que leva a 
+                        abandonar o pecado e voltar-se para Deus.
+                    </div>
+                    <div class="word-reference">Ver: Mateus 4:17, Lucas 15:7, 2 Coríntios 7:10</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Justificação</div>
+                    <div class="word-etymology">Grego: δικαιόω (dikaióō)</div>
+                    <div class="word-definition">
+                        O ato divino de declarar uma pessoa como justa. Na teologia cristã, é a declaração de Deus de que 
+                        nossos pecados foram perdoados e somos postos em relacionamento correto com Ele através da fé em Cristo.
+                    </div>
+                    <div class="word-reference">Ver: Romanos 3:28, Gálatas 2:16, Romanos 5:1</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Graça</div>
+                    <div class="word-etymology">Grego: χάρις (charis)</div>
+                    <div class="word-definition">
+                        Favor ou bênção immerecida. No cristianismo, refere-se principalmente ao favor divino que oferece 
+                        salvação sem que o homem a tenha conquistado.
+                    </div>
+                    <div class="word-reference">Ver: Efésios 2:8-9, Romanos 3:24, 2 Coríntios 12:9</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Reino de Deus</div>
+                    <div class="word-etymology">Grego: βασιλεία τοῦ θεοῦ (basileia tou theou)</div>
+                    <div class="word-definition">
+                        O domínio ou governo de Deus. Refere-se tanto ao reinado eterno de Deus quanto ao reinado atual 
+                        nas vidas daqueles que o aceitam como Senhor.
+                    </div>
+                    <div class="word-reference">Ver: Mateus 3:2, Marcos 1:15, Lucas 12:31</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Redenção</div>
+                    <div class="word-etymology">Grego: ἀπολύτρωσις (apolytrosis)</div>
+                    <div class="word-definition">
+                        Libertação ou resgate. Na fé cristã, refere-se à libertação do pecado e suas consequências através 
+                        do sacrifício de Jesus Cristo.
+                    </div>
+                    <div class="word-reference">Ver: Efésios 1:7, Romanos 3:24, Hebreus 9:12</div>
+                </div>
+                
+                <div class="word-item">
+                    <div class="word-title">Salvação</div>
+                    <div class="word-etymology">Hebraico: יְשׁוּעָה (yeshuá), Grego: σωτηρία (soteria)</div>
+                    <div class="word-definition">
+                        Libertação do pecado e da morte. Envolve o perdão divino, a transformação do coração e a vida eterna 
+                        com Deus.
+                    </div>
+                    <div class="word-reference">Ver: João 3:16, Romanos 1:16, 1 Pedro 1:9</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterWords() {
+            const input = document.getElementById('dictionarySearch').value.toLowerCase();
+            const items = document.querySelectorAll('.word-item');
+            
+            items.forEach(item => {
+                const title = item.querySelector('.word-title').textContent.toLowerCase();
+                const definition = item.querySelector('.word-definition').textContent.toLowerCase();
+                
+                if (title.includes(input) || definition.includes(input)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

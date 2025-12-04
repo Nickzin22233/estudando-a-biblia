@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temas Bíblicos - Estudo Bíblico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+        
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .theme-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .theme-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .theme-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .theme-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+        
+        .theme-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .theme-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .theme-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="index.html">Início</a>
+                <a href="index.html#livros">Livros</a>
+                <a href="index.html#recursos">Recursos</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="contact">
+        <div class="container content-section">
+            <h2>Temas Bíblicos</h2>
+            <p class="section-subtitle">Explore temas centrais da Bíblia e seus ensinamentos</p>
+            
+            <div class="themes-grid">
+                <div class="theme-card">
+                    <h3>❤️ Amor</h3>
+                    <ul>
+                        <li><a href="#">1 Coríntios 13 - Hino do Amor</a></li>
+                        <li><a href="#">João 3:16 - O Amor de Deus</a></li>
+                        <li><a href="#">Romanos 5:8 - Cristo Morre pelos Pecadores</a></li>
+                        <li><a href="#">1 João 4:7-8 - Deus é Amor</a></li>
+                    </ul>
+                </div>
+                
+                <div class="theme-card">
+                    <h3>✝️ Fé</h3>
+                    <ul>
+                        <li><a href="#">Hebreus 11 - Nuvem de Testemunhas</a></li>
+                        <li><a href="#">Romanos 10:17 - Fé Vem pelo Ouvir</a></li>
+                        <li><a href="#">Marcos 11:24 - Creia para Receber</a></li>
+                        <li><a href="#">Hebreus 12:2 - Jesus, Autor da Fé</a></li>
+                    </ul>
+                </div>
+                
+                <div class="theme-card">
+                    <h3>🎁 Graça</h3>
+                    <ul>
+                        <li><a href="#">Efésios 2:8-9 - Salvos Pela Graça</a></li>
+                        <li><a href="#">Romanos 3:23-24 - Justificados pela Graça</a></li>
+                        <li><a href="#">2 Coríntios 12:9 - Graça Suficiente</a></li>
+                        <li><a href="#">1 Pedro 1:3-4 - Viva em Graça</a></li>
+                    </ul>
+                </div>
+                
+                <div class="theme-card">
+                    <h3>🕊️ Paz</h3>
+                    <ul>
+                        <li><a href="#">João 14:27 - A Paz de Cristo</a></li>
+                        <li><a href="#">Filipenses 4:6-7 - Paz que Supera Entendimento</a></li>
+                        <li><a href="#">Romanos 5:1 - Paz com Deus</a></li>
+                        <li><a href="#">Mateus 5:9 - Bem-aventurados os Pacificadores</a></li>
+                    </ul>
+                </div>
+                
+                <div class="theme-card">
+                    <h3>🔄 Arrependimento</h3>
+                    <ul>
+                        <li><a href="#">Lucas 15 - A Parábola do Filho Pródigo</a></li>
+                        <li><a href="#">Atos 3:19 - Arrependimento e Perdão</a></li>
+                        <li><a href="#">2 Coríntios 7:10 - O Arrependimento Segundo Deus</a></li>
+                        <li><a href="#">Mateus 3:8 - Frutos do Arrependimento</a></li>
+                    </ul>
+                </div>
+                
+                <div class="theme-card">
+                    <h3>⛪ Salvação</h3>
+                    <ul>
+                        <li><a href="#">Romanos 10:9 - Confessa e Creia</a></li>
+                        <li><a href="#">Efésios 1:13-14 - Selados com o Espírito Santo</a></li>
+                        <li><a href="#">1 Tessalonicenses 5:9 - Destinados para a Salvação</a></li>
+                        <li><a href="#">Tito 3:5 - Nos Salvou pela Regeneração</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+</body>
+</html>

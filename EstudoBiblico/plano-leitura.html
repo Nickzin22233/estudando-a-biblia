@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Leitura - Estudo Bíblico</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plan-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .plan-day {
+            min-width: 80px;
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .plan-content h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📖 Estudo Bíblico</h1>
+            <nav class="nav">
+                <a href="index.html">Início</a>
+                <a href="index.html#livros">Livros</a>
+                <a href="index.html#recursos">Recursos</a>
+                <a href="index.html#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <section class="contact">
+        <div class="container content-section">
+            <h2>Plano de Leitura da Bíblia</h2>
+            <p class="section-subtitle">Leia a Bíblia inteira em um ano com este plano estruturado</p>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 1<br>Dias 1-7</div>
+                <div class="plan-content">
+                    <h4>Gênesis 1-7</h4>
+                    <p>Início da criação e primeiros capítulos da história bíblica - A criação do mundo, Adão e Eva, Noé e o dilúvio.</p>
+                </div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 2<br>Dias 8-14</div>
+                <div class="plan-content">
+                    <h4>Gênesis 8-15</h4>
+                    <p>Continuação da história de Noé, Abraão e as promessas de Deus - Aliança com Abraão.</p>
+                </div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 3<br>Dias 15-21</div>
+                <div class="plan-content">
+                    <h4>Gênesis 16-23</h4>
+                    <p>Isaque, a promessa cumprida e o sacrifício de Abraão - Um dos momentos mais dramáticos da Bíblia.</p>
+                </div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 4<br>Dias 22-28</div>
+                <div class="plan-content">
+                    <h4>Gênesis 24-32</h4>
+                    <p>Isaque e Rebeca, Jacó e suas 12 filhos - Fundação das 12 tribos de Israel.</p>
+                </div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 5<br>Dias 29-35</div>
+                <div class="plan-content">
+                    <h4>Gênesis 33-40</h4>
+                    <p>José no Egito - Uma história de redenção, confiança e perdão.</p>
+                </div>
+            </div>
+            
+            <div class="plan-item">
+                <div class="plan-day">Semana 6<br>Dias 36-42</div>
+                <div class="plan-content">
+                    <h4>Gênesis 41-50 e Êxodo 1-5</h4>
+                    <p>José administra o Egito, Jacob desça para o Egito - Preparação para a libertação de Israel.</p>
+                </div>
+            </div>
+            
+            <p style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-top: 2rem; color: #856404;">
+                <strong>💡 Dica:</strong> Este é apenas um resumo do plano. Recomenda-se ler a Bíblia completamente, dedicando tempo 
+                cada dia para refletir sobre os ensinamentos. Considere usar uma edição com notas explicativas.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Estudo Bíblico. Todos os direitos reservados.</p>
+            <p>Dedique-se à leitura e à meditação da Palavra de Deus</p>
+        </div>
+    </footer>
+
+    <script>
+        // Atualizar barra de progresso
+        function updateProgress() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+            const progress = Math.min((dayOfYear / 365) * 100, 100);
+            const progressFill = document.getElementById('progressFill');
+            progressFill.style.width = progress + '%';
+            progressFill.textContent = Math.round(progress) + '%';
+        }
+        
+        document.addEventListener('DOMContentLoaded', updateProgress);
+    </script>
+</body>
+</html>
